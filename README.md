@@ -3,7 +3,23 @@
 **A modular platform for dynamic job submission, task indexing, and agent participation across public and private task networks.**
 DSL-driven, pub/sub-aware, and built for scalable AI and human-task orchestration.
 
+### Project Status 🚧
+
+* **Alpha**: This project is in active development and subject to rapid change. ⚠️
+* **Testing Phase**: Features are experimental; expect bugs, incomplete functionality, and breaking changes. 🧪
+* **Not Production-Ready**: We **do not recommend using this in production** (or relying on it) right now. ⛔
+* **Compatibility**: APIs, schemas, and configuration may change without notice. 🔄
+* **Feedback Welcome**: Early feedback helps us stabilize future releases. 💬
+
 ---
+
+## 📚 Contents 
+
+* [Architecture](https://xchange-internal.pages.dev/tasks-db-system/architecture)
+* [Job Submission Lifecycle](https://xchange-internal.pages.dev/tasks-db-system/job-submission)
+* [Tasks DB Registry](https://xchange-internal.pages.dev/tasks-db-system/tasks-db-registry)
+* [Task Database](https://xchange-internal.pages.dev/tasks-db-system/tasks-db)
+
 
 ## 🌟 Highlights
 
@@ -63,40 +79,19 @@ DSL-driven, pub/sub-aware, and built for scalable AI and human-task orchestratio
 
 ---
 
-## 🛠 Project Status
+## 📢 Communications
 
-🟢 **Actively Maintained and in Production Use**
-📐 Componentized around submission, listing, and registry APIs
-🌍 Supports hybrid, multi-cluster setups and org-specific task networks
-🧪 Full validation, search, and query support for dev and test workflows
-
----
-
-## Links
-
-📚 Docs [docs/](./docs/)
-📦 Task Listing DB [src/task-listing-db](./src/task-listing-db/)
-🏛️ Task DB Registry [src/task-db-registry](./src/task-db-registry/)
-🧠 Job Submission System [src/job-submission](./src/job-submission/)
-👥 Org Association APIs [src/orgs](./src/orgs/)
+1. 📧 Email: [community@opencyberspace.org](mailto:community@opencyberspace.org)  
+2. 💬 Discord: [OpenCyberspace](https://discord.gg/W24vZFNB)  
+3. 🐦 X (Twitter): [@opencyberspace](https://x.com/opencyberspace)
 
 ---
 
-## 📜 License
+## 🤝 Join Us!
 
-This project is released under the [Apache 2.0 License](./LICENSE).
-Use, extend, or integrate freely with attribution.
+AIGrid is **community-driven**. Theory, Protocol, implementations - All contributions are welcome.
 
----
+### Get Involved
 
-## 🗣️ Get Involved
-
-We're building a **federated infrastructure for AI-native task execution**.
-
-* 💬 Open issues for suggestions or feedback
-* 🧪 Help test public and private submission flows
-* 🤖 Build new agent integrations
-* ⭐ Star the repo and share with others
-
-Join us in defining the next-generation task registry ecosystem.
-
+- 💬 [Join our Discord](https://discord.gg/W24vZFNB)  
+- 📧 Email us: [community@opencyberspace.org](mailto:community@opencyberspace.org)
