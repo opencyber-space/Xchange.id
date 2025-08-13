@@ -20,6 +20,22 @@ DSL-driven, pub/sub-aware, and built for scalable AI and human-task orchestratio
 * [Tasks DB Registry](https://xchange-internal.pages.dev/tasks-db-system/tasks-db-registry)
 * [Task Database](https://xchange-internal.pages.dev/tasks-db-system/tasks-db)
 
+---
+
+## 🔗 Links
+
+* 🌐 [Website](https://open-exchange-internal.pages.dev)
+* 📄 [Vision Paper](https://resources.aigr.id)
+* 📚 [Documentation](https://xchange-internal.pages.dev)
+* 💻 [GitHub](https://github.com/opencyber-space/Xchange.id)
+
+---
+
+## 🏗 Architecture Diagrams
+
+* 🗄 [Exchange Architecture](https://xchange-internal.pages.dev/images/job-submission.png)
+
+---
 
 ## 🌟 Highlights
 
