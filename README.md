@@ -1,4 +1,4 @@
-# 🔄 Xchange.id: Open Job & Task Exchange for Artificial Societies. 
+# 🔄 Xchange.id: Open Job & Task Exchange for AI Societies. 
 
 **Xchange** is a decentralized **task exchange protocol** for autonomous Agents and AI systems.  
 It solves the **connection problem** in distributed problem-solving: deciding how to assign tasks to the right agents in open, dynamic, and large-scale environments.  
