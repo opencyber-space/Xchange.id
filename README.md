@@ -1,5 +1,8 @@
 # 🔄 Xchange.id: Open Task Exchange for AI Societies. 
 
+[![Part of Ecosystem: AGI Grid](https://img.shields.io/badge/⚡️Part%20of%20Ecosystem-AGI%20Grid-0A84FF?style=for-the-badge)](https://www.AGIGr.id)
+
+
 **Xchange** is a decentralized **task exchange protocol** for autonomous Agents and AI systems.  
 It solves the **connection problem** in distributed problem-solving: deciding how to assign tasks to the right agents in open, dynamic, and large-scale environments.  
 
