@@ -1,0 +1,1501 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../02-schema/">
+      
+      
+        <link rel="next" href="../04-discovery/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>3. APIs - Xchange.id</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-apis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Xchange.id" class="md-header__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Xchange.id
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. APIs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Xchange.id" class="md-nav__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Xchange.id
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📚 Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📤 Xchange.id
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📤 Xchange.id
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/job-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Job Submission Lifecycle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db-registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tasks DB Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Task Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exchange System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exchange System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/04-assignment-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Assignment modes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/05-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Functions to write
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/06-delegate-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Delegate system
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/07-bidding-mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Bidding mode integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Jobs Gateway
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Jobs Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-response-envelope" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Response envelope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Registry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual health check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-gateway-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gateway forwarding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-gateway-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Gateway health
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-full-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Full reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Discovery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-health-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Health checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Deployment & walkthrough
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-response-envelope" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Response envelope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Registry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual health check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-gateway-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gateway forwarding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-gateway-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Gateway health
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-full-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Full reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../">← Back to index</a></p>
+<h1 id="3-apis">3. APIs</h1>
+<p>Base path: none (routes are mounted at root). Default port <code>5000</code>, which
+can be overridden with the <code>PORT</code> env var (unlike exchange-db, where <code>PORT</code>
+is informational only).</p>
+<h2 id="31-response-envelope">3.1 Response envelope</h2>
+<p>The gateway's own endpoints use the same envelope as exchange-db and Orcade:</p>
+<pre><code class="language-json">// success
+{ &quot;ok&quot;: true, &quot;data&quot;: { ... } }
+
+// failure
+{ &quot;ok&quot;: false, &quot;error&quot;: &quot;human readable message&quot; }
+</code></pre>
+<p>Forwarded calls (<a href="#33-gateway-forwarding">§3.3</a>) return <strong>the exchange's</strong>
+response body and status code unchanged. Since exchange-db uses the same
+envelope, callers can't tell the two apart, except for the gateway's own
+<code>404</code> / <code>502</code> errors described there.</p>
+<h2 id="32-registry">3.2 Registry</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges</code></td>
+<td>Register an exchange</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td>Fetch one registry entry</td>
+</tr>
+<tr>
+<td><code>PUT</code> / <code>PATCH</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td>Raw <code>$set</code> update; returns the fresh entry</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td>Remove an exchange from the registry</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges/query</code></td>
+<td>Query registry entries with a raw Mongo filter</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges/{exchange_id}/health-check</code></td>
+<td>Probe the exchange now and return the updated entry</td>
+</tr>
+</tbody>
+</table>
+<h3 id="register">Register</h3>
+<p><code>POST /exchanges</code></p>
+<p><strong>Request body:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default if omitted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exchange_id</code></td>
+<td>string</td>
+<td><strong>required</strong>. <code>400</code> if missing</td>
+</tr>
+<tr>
+<td><code>exchange_api_url</code></td>
+<td>string</td>
+<td><strong>required</strong>. <code>400</code> if missing</td>
+</tr>
+<tr>
+<td><code>exchange_name</code></td>
+<td>string</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>exchange_description</code></td>
+<td>string</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>exchange_tags</code></td>
+<td>array&lt;string&gt;</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>exchange_metadata</code></td>
+<td>object</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>skip_health_check</code></td>
+<td>boolean</td>
+<td><code>false</code>. When <code>true</code>, register without probing (status starts as <code>unknown</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Unless <code>skip_health_check</code> is <code>true</code>, the gateway probes the exchange first
+(<a href="../05-health-checks/#51-the-probe">§5.1</a>) and refuses to register it if the
+probe fails. This catches typos in <code>exchange_api_url</code> at registration time
+rather than at first use.</p>
+<pre><code class="language-bash">curl -X POST http://localhost:5000/exchanges \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;exchange_id&quot;: &quot;demo-exchange&quot;,
+    &quot;exchange_api_url&quot;: &quot;http://demo-exchange-svc.exchanges.svc.cluster.local:5000&quot;,
+    &quot;exchange_name&quot;: &quot;Demo exchange&quot;,
+    &quot;exchange_tags&quot;: [&quot;nlp&quot;, &quot;public&quot;],
+    &quot;exchange_metadata&quot;: {&quot;owner&quot;: &quot;team-nlp&quot;, &quot;region&quot;: &quot;us-east&quot;}
+  }'
+</code></pre>
+<p>→ <code>201 { "ok": true, "data": &lt;ExchangeEntry&gt; }</code>, with
+<code>exchange_status: "healthy"</code> and <code>last_health_check_time</code> set.</p>
+<p><strong>Failure modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td><code>exchange_id</code> or <code>exchange_api_url</code> missing</td>
+</tr>
+<tr>
+<td><code>400</code></td>
+<td>Health probe failed. The error reads <code>exchange not reachable at &lt;url&gt;: &lt;reason&gt;</code>. Nothing is persisted.</td>
+</tr>
+<tr>
+<td><code>409</code></td>
+<td>An entry with this <code>exchange_id</code> already exists. Use <code>PATCH</code> to change it, or <code>DELETE</code> first.</td>
+</tr>
+<tr>
+<td><code>500</code></td>
+<td>The DB insert itself failed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="read">Read</h3>
+<pre><code class="language-bash">curl http://localhost:5000/exchanges/demo-exchange
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": &lt;ExchangeEntry&gt; }</code>, or <code>404</code> if not registered.</p>
+<h3 id="update">Update</h3>
+<p><code>PUT</code> and <code>PATCH</code> behave identically: the body is applied as a raw Mongo
+<code>$set</code>, so dotted paths like <code>"exchange_metadata.region"</code> work.</p>
+<pre><code class="language-bash">curl -X PATCH http://localhost:5000/exchanges/demo-exchange \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;exchange_tags&quot;: [&quot;nlp&quot;, &quot;public&quot;, &quot;fr&quot;], &quot;exchange_metadata.region&quot;: &quot;eu-west&quot;}'
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": &lt;updated ExchangeEntry&gt; }</code>.</p>
+<p>Rules:</p>
+<ul>
+<li>Server-managed fields (<a href="../02-schema/#21-exchangeentry">§2.1</a>) in the body
+  are dropped.</li>
+<li><code>exchange_id</code> can't be changed. A body with a <em>different</em> <code>exchange_id</code>
+  gets <code>400</code>; repeating the same value is harmless.</li>
+<li>Changing <code>exchange_api_url</code> to a different URL resets <code>exchange_status</code> to
+  <code>unknown</code>, since the old health result says nothing about the new URL. The
+  next background check, or a manual
+  <code>POST /exchanges/{id}/health-check</code>, fills it in. The update itself does
+  <strong>not</strong> probe the new URL.</li>
+<li><code>404</code> if the exchange isn't registered.</li>
+</ul>
+<h3 id="delete">Delete</h3>
+<pre><code class="language-bash">curl -X DELETE http://localhost:5000/exchanges/demo-exchange
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": {"deleted": true} }</code>, or <code>404</code> if not
+registered. This only removes the registry entry. The exchange-db
+deployment and its data are untouched.</p>
+<h3 id="query">Query</h3>
+<p><code>POST /exchanges/query</code> takes a raw Mongo filter, the same convention as
+exchange-db's <code>/tasks/query</code> and <code>/subjects/query</code>. Because the filter is
+passed straight to <code>collection.find()</code>, any valid Mongo query operator works.</p>
+<pre><code class="language-bash"># every exchange tagged &quot;nlp&quot;
+curl -X POST http://localhost:5000/exchanges/query \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;exchange_tags&quot;: {&quot;$in&quot;: [&quot;nlp&quot;]}}'
+
+# every exchange that failed its last health check
+curl -X POST http://localhost:5000/exchanges/query \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;exchange_status&quot;: &quot;unreachable&quot;}'
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": [&lt;ExchangeEntry&gt;, ...] }</code>, or <code>400</code> for an
+invalid filter. For combined registry + subject searches, use
+<a href="../04-discovery/"><code>/discover</code></a> instead.</p>
+<h3 id="manual-health-check">Manual health check</h3>
+<pre><code class="language-bash">curl -X POST http://localhost:5000/exchanges/demo-exchange/health-check
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": &lt;ExchangeEntry&gt; }</code> with fresh
+<code>exchange_status</code> / <code>last_health_check_time</code> / <code>last_health_check_error</code>.
+The response is <code>200</code> even when the exchange is down; check
+<code>data.exchange_status</code>. <code>404</code> if not registered.</p>
+<h2 id="33-gateway-forwarding">3.3 Gateway forwarding</h2>
+<p><code>GET | POST | PUT | PATCH | DELETE /exchanges/{exchange_id}/api/&lt;path&gt;</code></p>
+<p>The gateway looks up <code>exchange_id</code> in the registry and sends the request on
+to <code>{exchange_api_url}/&lt;path&gt;</code>, preserving the method, the query string, the
+raw request body and its <code>Content-Type</code>. The response is returned exactly as
+the exchange produced it, with the same status code, body and <code>Content-Type</code>.</p>
+<p>Every exchange-db endpoint (<a href="../../exchange-system/03-apis/">Exchange System §3</a>)
+is reachable this way:</p>
+<table>
+<thead>
+<tr>
+<th>Through the gateway</th>
+<th>Forwarded to exchange-db</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /exchanges/{id}/api/tasks</code></td>
+<td><code>POST /tasks</code></td>
+</tr>
+<tr>
+<td><code>GET /exchanges/{id}/api/tasks/{task_id}</code></td>
+<td><code>GET /tasks/{task_id}</code></td>
+</tr>
+<tr>
+<td><code>GET /exchanges/{id}/api/tasks/{task_id}/output</code></td>
+<td><code>GET /tasks/{task_id}/output</code></td>
+</tr>
+<tr>
+<td><code>POST /exchanges/{id}/api/tasks/query</code></td>
+<td><code>POST /tasks/query</code></td>
+</tr>
+<tr>
+<td><code>POST /exchanges/{id}/api/subjects</code></td>
+<td><code>POST /subjects</code></td>
+</tr>
+<tr>
+<td><code>GET</code> / <code>PUT</code> / <code>PATCH</code> / <code>DELETE /exchanges/{id}/api/subjects/{subject_id}</code></td>
+<td>same method on <code>/subjects/{subject_id}</code></td>
+</tr>
+<tr>
+<td><code>POST /exchanges/{id}/api/subjects/query</code></td>
+<td><code>POST /subjects/query</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash"># submit a direct-mode task to demo-exchange, without knowing where it runs
+curl -X POST http://localhost:5000/exchanges/demo-exchange/api/tasks \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;task_assignment_type&quot;: &quot;direct&quot;,
+    &quot;task_data&quot;: {&quot;instruction&quot;: &quot;summarize this document&quot;, &quot;doc_url&quot;: &quot;https://storage.example.com/report.pdf&quot;},
+    &quot;task_metadata&quot;: {&quot;task_assignment&quot;: {&quot;subject_id&quot;: &quot;agent-summarizer-01&quot;}}
+  }'
+
+# poll its output
+curl http://localhost:5000/exchanges/demo-exchange/api/tasks/&lt;task_id&gt;/output
+</code></pre>
+<p><strong>Gateway-originated errors</strong> (everything else comes from the exchange):</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Body</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>404</code></td>
+<td><code>{"ok": false, "error": "exchange not found"}</code></td>
+<td><code>exchange_id</code> isn't registered</td>
+</tr>
+<tr>
+<td><code>502</code></td>
+<td><code>{"ok": false, "error": "exchange '&lt;id&gt;' unreachable: &lt;reason&gt;"}</code></td>
+<td>Connection refused, DNS failure, or no response within the read timeout</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li><strong>The gateway never checks <code>exchange_status</code> before forwarding.</strong> An
+  <code>unreachable</code> exchange still gets the request. If it has recovered, the
+  call succeeds; if not, you get a <code>502</code>.</li>
+<li><strong>Timeouts:</strong> <code>(10, PROXY_READ_TIMEOUT)</code> seconds <code>(connect, read)</code>, default
+  read timeout <code>300</code>. That's long enough for <code>function</code>-mode <code>POST /tasks</code>,
+  which blocks on a selector-function call
+  (<a href="../../exchange-system/04-assignment-modes/#42-function-mode">Exchange System §4.2</a>).</li>
+<li><strong>One exchange per call.</strong> Forwarding never fans out. Cross-exchange
+  queries are discovery's job (<a href="../04-discovery/">§4</a>).</li>
+</ul>
+<h2 id="34-gateway-health">3.4 Gateway health</h2>
+<pre><code class="language-bash">curl http://localhost:5000/health
+</code></pre>
+<p>→ <code>200 { "ok": true, "data": {"status": "ok"} }</code>. This is a liveness check
+for the gateway process only. It doesn't touch MongoDB or any exchange.</p>
+<h2 id="35-full-reference">3.5 Full reference</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges</code></td>
+<td><a href="#register">§3.2 Register</a></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td><a href="#read">§3.2 Read</a></td>
+</tr>
+<tr>
+<td><code>PUT</code> / <code>PATCH</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td><a href="#update">§3.2 Update</a></td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/exchanges/{exchange_id}</code></td>
+<td><a href="#delete">§3.2 Delete</a></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges/query</code></td>
+<td><a href="#query">§3.2 Query</a></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/exchanges/{exchange_id}/health-check</code></td>
+<td><a href="#manual-health-check">§3.2 Manual health check</a></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/discover</code></td>
+<td><a href="../04-discovery/">§4</a></td>
+</tr>
+<tr>
+<td>any</td>
+<td><code>/exchanges/{exchange_id}/api/&lt;path&gt;</code></td>
+<td><a href="#33-gateway-forwarding">§3.3</a></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/health</code></td>
+<td><a href="#34-gateway-health">§3.4</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="../02-schema/">← Previous: Schema</a> · <a href="../">Back to index</a> · <a href="../04-discovery/">Next: Discovery →</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

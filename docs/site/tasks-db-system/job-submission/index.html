@@ -1,0 +1,1977 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../architecture/">
+      
+      
+        <link rel="next" href="../tasks-db-registry/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>Job Submission Lifecycle - Xchange.id</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#job-submission-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Xchange.id" class="md-header__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Xchange.id
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Job Submission Lifecycle
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Xchange.id" class="md-nav__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Xchange.id
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📚 Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📤 Xchange.id
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📤 Xchange.id
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Job Submission Lifecycle
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Job Submission Lifecycle
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-system-architectural-flow-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Submission System – Architectural Flow Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of the Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of the Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-user-submits-a-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. User Submits a Job
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-initial-parsing-and-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Initial Parsing and Classification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-decision-phase-routing-the-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Decision Phase: Routing the Job
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Decision Phase: Routing the Job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-job-specifies-a-task-db-id-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Job Specifies a Task DB ID Explicitly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-job-includes-job-requirements-but-no-db-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Job Includes Job Requirements (but no DB ID)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-no-requirements-or-preferences-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. No Requirements or Preferences Provided
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-private-direct-push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      D. Private Direct Push Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-final-submission-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Final Submission and Execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-routing-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Routing Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Submission APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Submission APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionvalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/validate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionsubmit" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/submit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taskdb-registry-search-and-taskdb-tasks-search-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaskDB registry search and TaskDB tasks search APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TaskDB registry search and TaskDB tasks search APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-post-searchtask_registries" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. POST /search/task_registries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-post-searchtask_registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. POST /search/task_registry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-format-via-query_translator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Format (via query_translator)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query Format (via query_translator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-object-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Object Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Operators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-combinators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical Combinators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1-simple-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1: Simple Query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-compound-andor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2: Compound AND/OR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-pattern-match-using-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3: Pattern Match Using LIKE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tasks-db-registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tasks DB Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tasks-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Task Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exchange System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exchange System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/04-assignment-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Assignment modes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/05-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Functions to write
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/06-delegate-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Delegate system
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/07-bidding-mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Bidding mode integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Jobs Gateway
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Jobs Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/04-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Discovery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/05-health-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Health checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/06-deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Deployment & walkthrough
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-system-architectural-flow-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Submission System – Architectural Flow Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of the Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of the Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-user-submits-a-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. User Submits a Job
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-initial-parsing-and-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Initial Parsing and Classification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-decision-phase-routing-the-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Decision Phase: Routing the Job
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Decision Phase: Routing the Job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-job-specifies-a-task-db-id-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Job Specifies a Task DB ID Explicitly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-job-includes-job-requirements-but-no-db-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Job Includes Job Requirements (but no DB ID)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-no-requirements-or-preferences-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. No Requirements or Preferences Provided
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-private-direct-push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      D. Private Direct Push Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-final-submission-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Final Submission and Execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-routing-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Routing Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Submission APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Submission APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionvalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/validate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-job-submissionsubmit" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /job-submission/submit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taskdb-registry-search-and-taskdb-tasks-search-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaskDB registry search and TaskDB tasks search APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TaskDB registry search and TaskDB tasks search APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-post-searchtask_registries" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. POST /search/task_registries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-post-searchtask_registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. POST /search/task_registry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-format-via-query_translator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Format (via query_translator)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query Format (via query_translator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-object-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Object Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Operators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-combinators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical Combinators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1-simple-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1: Simple Query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-compound-andor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2: Compound AND/OR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-pattern-match-using-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3: Pattern Match Using LIKE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="job-submission-system">Job submission system</h1>
+<p>The Job Submission System is a dynamic, rule-driven pipeline designed to flexibly route jobs based on user intent, configuration, and context. Whether the job is targeted to a specific task DB, defined by a set of search constraints, or left without explicit preferences, the system intelligently interprets the payload, validates its structure, and determines the appropriate submission path. Jobs can be directed to a private organization task DB, routed through discovery mechanisms using metadata and rule evaluation, or pushed to a global task DB by default. This architecture ensures scalable, intent-aware job processing while maintaining support for both automated and user-driven workflows.</p>
+<h2 id="job-submission-system-architectural-flow-documentation">Job Submission System – Architectural Flow Documentation</h2>
+<p>The <strong>Job Submission System</strong> is a dynamic pipeline that intelligently parses, interprets, and routes job tasks based on the user's input. It supports private, public, and rules-based task distribution modes, offering flexibility and control over where and how jobs are processed.</p>
+<hr />
+<h2 id="overview-of-the-flow">Overview of the Flow</h2>
+<h3 id="1-user-submits-a-job">1. <strong>User Submits a Job</strong></h3>
+<p>The process begins when a user or external system submits a job payload through the <strong>Job Submission API</strong>. This payload typically contains the job goal, requirements, constraints, and optionally, target task DB identifiers or preferences.</p>
+<hr />
+<h2 id="2-initial-parsing-and-classification">2. <strong>Initial Parsing and Classification</strong></h2>
+<ul>
+<li>The system performs <strong>initial parsing</strong> using a DSL interpreter to understand what the job is about.</li>
+<li>
+<p>It passes through:</p>
+</li>
+<li>
+<p><strong>Protocol DB validator</strong> – Ensures the input structure aligns with predefined templates.</p>
+</li>
+<li><strong>Job intent identifier</strong> – Determines the type of job and its processing intent.</li>
+<li><strong>Intermediate payload generator</strong> – Converts input into a uniform internal format consumable by downstream modules.</li>
+</ul>
+<hr />
+<h2 id="3-decision-phase-routing-the-job">3. <strong>Decision Phase: Routing the Job</strong></h2>
+<p>Based on the parsed content, the system branches into one of the following paths:</p>
+<hr />
+<h3 id="a-job-specifies-a-task-db-id-explicitly">A. <strong>Job Specifies a Task DB ID Explicitly</strong></h3>
+<ul>
+<li>If the payload includes a <code>task_db_id</code>, the system bypasses discovery.</li>
+<li>The job is <strong>submitted directly</strong> to the corresponding Task DB using the resolved service URL.</li>
+<li>This mode is used when the sender knows where the job must go (e.g., private org DB).</li>
+</ul>
+<hr />
+<h3 id="b-job-includes-job-requirements-but-no-db-id">B. <strong>Job Includes Job Requirements (but no DB ID)</strong></h3>
+<ul>
+<li>
+<p>If the job includes <strong>semantic requirements or constraints</strong> but no DB ID:</p>
+</li>
+<li>
+<p>The system invokes the <strong>Job Registry Search API</strong> to filter task DBs matching the provided query.</p>
+</li>
+<li>A <strong>rule executor</strong> evaluates results using internal DSL-based rules.</li>
+<li>The <strong>most appropriate Task DB</strong> is selected.</li>
+<li>The job is then <strong>routed and submitted</strong> to the selected DB.</li>
+</ul>
+<hr />
+<h3 id="c-no-requirements-or-preferences-provided">C. <strong>No Requirements or Preferences Provided</strong></h3>
+<ul>
+<li>
+<p>If neither <code>task_db_id</code> nor search constraints are provided:</p>
+</li>
+<li>
+<p>The job is routed to a <strong>default global Task DB</strong> using the <strong>Global Tasks DB Pusher</strong>.</p>
+</li>
+<li>This ensures the job is still posted and discoverable even without any custom routing logic.</li>
+</ul>
+<hr />
+<h3 id="d-private-direct-push-mode">D. <strong>Private Direct Push Mode</strong></h3>
+<ul>
+<li>
+<p>For certain internal org-level submissions:</p>
+</li>
+<li>
+<p>The job can be pushed directly to a <strong>private Task DB channel</strong> belonging to the organization.</p>
+</li>
+<li>This bypasses public/global registries and acts as a fast-track posting path.</li>
+</ul>
+<hr />
+<h2 id="4-final-submission-and-execution">4. <strong>Final Submission and Execution</strong></h2>
+<ul>
+<li>Once routed, the <strong>Job Submission Client API</strong> handles the actual transmission to the resolved Task DB.</li>
+<li>Jobs submitted are now visible to <strong>agents, executors, or auction systems</strong> based on the target DB's access policy.</li>
+<li>The <strong>Action Executor</strong> handles immediate post-submission actions (e.g., triggering pipelines, workflows, or verification).</li>
+</ul>
+<hr />
+<h2 id="summary-of-routing-logic">Summary of Routing Logic</h2>
+<table>
+<thead>
+<tr>
+<th>Input Condition</th>
+<th>Routing Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task_db_id</code> provided</td>
+<td>Submit directly to specified Task DB</td>
+</tr>
+<tr>
+<td>Job requirements provided</td>
+<td>Run query → select DB → submit</td>
+</tr>
+<tr>
+<td>No requirements or ID</td>
+<td>Submit to Global Task DB</td>
+</tr>
+<tr>
+<td>Special internal submission</td>
+<td>Push to private channel Task DB</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="job-submission-apis">Job Submission APIs</h2>
+<p>These APIs handle job intake workflows including validation, schema mapping, and final submission with routing logic. This system ensures consistent job structure and dynamic dispatching based on assignment data.</p>
+<hr />
+<h3 id="post-job-submissionvalidate">POST <code>/job-submission/validate</code></h3>
+<p><strong>Description:</strong>
+Validates the job submission input by mapping it to internal schema format and performing field-level checks.</p>
+<p><strong>Request Body Example:</strong></p>
+<pre><code class="language-json">{
+  &quot;jobId&quot;: &quot;job-001&quot;,
+  &quot;jobGoal&quot;: { &quot;type&quot;: &quot;summarization&quot; },
+  &quot;jobObjectives&quot;: [&quot;analyze&quot;, &quot;summarize&quot;],
+  &quot;jobPriorityValue&quot;: 5,
+  &quot;jobCompletionMode&quot;: &quot;single_window&quot;,
+  &quot;submittedBy&quot;: &quot;org-123&quot;,
+  &quot;jobOutputTemplateId&quot;: &quot;template-xyz&quot;,
+  &quot;jobVerificationSubjectIds&quot;: [&quot;agent-456&quot;]
+}
+</code></pre>
+<p><strong>Validation Performed:</strong></p>
+<ul>
+<li>Required fields must be present and of correct type.</li>
+<li>Enumerated fields (e.g. <code>jobCompletionMode</code>) are checked against allowed values.</li>
+<li>All flexible fields (e.g., <code>job_goal</code>, <code>job_sla_terms_json</code>) are type-validated if present.</li>
+</ul>
+<p><strong>Success Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;job_id&quot;: &quot;job-001&quot;,
+    &quot;job_goal&quot;: { &quot;type&quot;: &quot;summarization&quot; },
+    ...
+  },
+  &quot;message&quot;: &quot;Validation passed&quot;
+}
+</code></pre>
+<p><strong>Failure Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;message&quot;: &quot;job_objectives must be a list or None&quot;
+}
+</code></pre>
+<hr />
+<h3 id="post-job-submissionmap">POST <code>/job-submission/map</code></h3>
+<p><strong>Description:</strong>
+Maps a user-facing job submission format to internal database schema format without validating it.</p>
+<p><strong>Request Body:</strong>
+Same structure as <code>/validate</code>.</p>
+<p><strong>Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;job_id&quot;: &quot;job-001&quot;,
+    &quot;job_goal&quot;: { ... },
+    ...
+  },
+  &quot;message&quot;: &quot;Mapping completed&quot;
+}
+</code></pre>
+<p><strong>Use Case:</strong>
+Useful for client-side previews, data transformation checks, or schema-aligned logging.</p>
+<hr />
+<h3 id="post-job-submissionsubmit">POST <code>/job-submission/submit</code></h3>
+<p><strong>Description:</strong>
+Handles full job submission lifecycle:</p>
+<ul>
+<li>Validates input</li>
+<li>Maps to internal DB format</li>
+<li>Generates a <code>job_id</code> (UUID)</li>
+<li>Runs assignment logic to determine target task DB</li>
+<li>Returns the selected task DB and assigned job ID</li>
+</ul>
+<p><strong>Request Body Example:</strong></p>
+<pre><code class="language-json">{
+  &quot;jobData&quot;: {
+    &quot;jobGoal&quot;: { &quot;type&quot;: &quot;summarization&quot; },
+    &quot;jobObjectives&quot;: [&quot;analyze&quot;],
+    &quot;jobPriorityValue&quot;: 10,
+    &quot;jobCompletionMode&quot;: &quot;multi_window&quot;,
+    &quot;submittedBy&quot;: &quot;org-789&quot;,
+    &quot;jobOutputTemplateId&quot;: &quot;template-abc&quot;,
+    &quot;jobVerificationSubjectIds&quot;: [&quot;agent-001&quot;]
+  },
+  &quot;assignmentInfo&quot;: {
+    &quot;clusterPreference&quot;: &quot;cluster-east&quot;,
+    &quot;region&quot;: &quot;us-east&quot;
+  }
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;job_id&quot;: &quot;a6c4d4f2-b2ab-4f11-a497-0c18aa8fbabc&quot;,
+    &quot;task_db_id&quot;: &quot;taskdb-245&quot;
+  },
+  &quot;message&quot;: &quot;Job submitted successfully&quot;
+}
+</code></pre>
+<p><strong>Failure Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;message&quot;: &quot;job_output_template_id must be a string&quot;
+}
+</code></pre>
+<hr />
+<h2 id="taskdb-registry-search-and-taskdb-tasks-search-apis">TaskDB registry search and TaskDB tasks search APIs</h2>
+<p>These endpoints enable two distinct types of search operations:</p>
+<ol>
+<li><strong>Search for a Task DB</strong> from the <strong>Task DB Registry</strong> based on metadata (e.g., tags, cluster ID, associated collections).</li>
+<li><strong>Search for Jobs (Tasks)</strong> inside a specific <strong>Task DB</strong> — each job follows the job schema.</li>
+</ol>
+<hr />
+<h3 id="1-post-searchtask_registries">1. POST <code>/search/task_registries</code></h3>
+<p><strong>Purpose:</strong>
+Searches the <strong>Task DB Registry</strong> to locate <strong>Task DBs</strong> that match specified metadata filters.</p>
+<p><strong>Used For:</strong>
+Finding which Task DB(s) in the network are suitable for a particular category of tasks (e.g., by domain, cluster, tags).</p>
+<hr />
+<p><strong>Request Body Example:</strong></p>
+<pre><code class="language-json">{
+  &quot;task_registry_id&quot;: &quot;task-registry-001&quot;,
+  &quot;query&quot;: {
+    &quot;search_metadata.tags&quot;: { &quot;$in&quot;: [&quot;vision&quot;, &quot;segmentation&quot;] },
+    &quot;accessibility_data.visibility&quot;: &quot;public&quot;
+  }
+}
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task_registry_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>ID used to fetch the Task DB registry's endpoint.</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Mongo-style filter used to find Task DBs from the registry.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Backend Flow:</strong></p>
+<ul>
+<li>Resolves registry metadata via <code>task_registry_id</code>.</li>
+<li>Uses <code>TasksDBRegistryClient</code> to query the Task DB registry with <code>query_tasks()</code>.</li>
+</ul>
+<p><strong>Success Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: [
+    {
+      &quot;task_listing_db_id&quot;: &quot;taskdb-567&quot;,
+      &quot;task_db_cluster_id&quot;: &quot;cluster-west&quot;,
+      &quot;search_metadata&quot;: {
+        &quot;tags&quot;: [&quot;vision&quot;, &quot;segmentation&quot;]
+      }
+    }
+  ],
+  &quot;message&quot;: &quot;Matching Task DBs retrieved successfully&quot;
+}
+</code></pre>
+<hr />
+<h3 id="2-post-searchtask_registry">2. POST <code>/search/task_registry</code></h3>
+<p><strong>Purpose:</strong>
+Searches for <strong>submitted jobs</strong> within a specific <strong>Task DB</strong>, where each job follows the <code>JobCoreData</code> schema.</p>
+<p><strong>Used For:</strong>
+Querying actual jobs/tasks inside a selected Task DB (e.g., open jobs, jobs by priority, submitted by org X).</p>
+<hr />
+<p><strong>Request Body Example:</strong></p>
+<pre><code class="language-json">{
+  &quot;task_registry_id&quot;: &quot;task-registry-001&quot;,
+  &quot;query&quot;: {
+    &quot;job_goal.type&quot;: &quot;translation&quot;,
+    &quot;job_priority_value&quot;: { &quot;$gte&quot;: 7 },
+    &quot;submitted_by&quot;: &quot;org-123&quot;
+  }
+}
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task_registry_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Used to resolve the corresponding Task DB's API URL.</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>Mongo-style filter applied to the <code>JobCoreData</code> schema.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Query Fields (from <code>JobCoreData</code>):</strong></p>
+<ul>
+<li><code>job_goal.type</code></li>
+<li><code>job_completion_mode</code></li>
+<li><code>job_priority_value</code></li>
+<li><code>submitted_by</code></li>
+<li><code>job_verification_subject_ids</code></li>
+<li><code>job_output_template_id</code></li>
+</ul>
+<p><strong>Backend Flow:</strong></p>
+<ul>
+<li>Resolves the Task DB metadata via <code>task_registry_id</code>.</li>
+<li>Uses <code>TasksRegistryClient</code> to send <code>.query_jobs()</code> with translated query.</li>
+</ul>
+<p><strong>Success Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: [
+    {
+      &quot;job_id&quot;: &quot;job-001&quot;,
+      &quot;job_goal&quot;: { &quot;type&quot;: &quot;translation&quot; },
+      &quot;submitted_by&quot;: &quot;org-123&quot;,
+      &quot;job_priority_value&quot;: 8,
+      &quot;job_completion_mode&quot;: &quot;single_window&quot;
+    },
+    ...
+  ],
+  &quot;message&quot;: &quot;Matching jobs retrieved successfully&quot;
+}
+</code></pre>
+<hr />
+<h3 id="summary-table">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/search/task_registries</code></td>
+<td>Search Task <strong>DBs</strong> in the registry using metadata</td>
+</tr>
+<tr>
+<td><code>/search/task_registry</code></td>
+<td>Search <strong>Jobs</strong> inside a specific Task DB (JobCoreData format)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Here is the <strong>enhanced documentation</strong> for your <code>/search/task_registry</code> and <code>/search/task_registries</code> APIs, with a detailed explanation of the <strong>query payload format</strong>, which is interpreted using the provided <code>query_translator(...)</code> logic.</p>
+<hr />
+<h2 id="query-format-via-query_translator">Query Format (via <code>query_translator</code>)</h2>
+<p>The APIs accept a structured, declarative query format that gets <strong>translated into a MongoDB-compatible query</strong> using a custom <code>query_translator(...)</code>. This enables clients to express nested logical and comparison conditions without writing raw MongoDB syntax.</p>
+<hr />
+<h3 id="query-object-format">Query Object Format</h3>
+<p>Each query can be:</p>
+<ul>
+<li>A <strong>simple condition</strong> (<code>variable</code>, <code>operator</code>, <code>value</code>)</li>
+<li>Or a <strong>logical group</strong> (<code>logicalOperator</code>, <code>conditions[]</code>)</li>
+</ul>
+<hr />
+<h3 id="supported-operators">Supported Operators</h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>MongoDB Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>Equality</td>
+<td><code>{ field: value }</code></td>
+</tr>
+<tr>
+<td><code>IN</code></td>
+<td>Value in list</td>
+<td><code>{ field: { $in: [...] } }</code></td>
+</tr>
+<tr>
+<td><code>LIKE</code></td>
+<td>Pattern match (wildcard <code>*</code>)</td>
+<td><code>{ field: { $regex: ... } }</code></td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+<td><code>{ field: { $lt: value } }</code></td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal</td>
+<td><code>{ field: { $lte: value } }</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+<td><code>{ field: { $gt: value } }</code></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal</td>
+<td><code>{ field: { $gte: value } }</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="logical-combinators">Logical Combinators</h3>
+<table>
+<thead>
+<tr>
+<th>Logical Operator</th>
+<th>Description</th>
+<th>MongoDB Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AND</code></td>
+<td>All conditions must match</td>
+<td><code>{ $and: [...] }</code></td>
+</tr>
+<tr>
+<td><code>OR</code></td>
+<td>At least one condition must match</td>
+<td><code>{ $or: [...] }</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="example-1-simple-query">Example 1: Simple Query</h3>
+<p><strong>Input Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;variable&quot;: &quot;job_goal.type&quot;,
+  &quot;operator&quot;: &quot;==&quot;,
+  &quot;value&quot;: &quot;summarization&quot;
+}
+</code></pre>
+<p><strong>Translated MongoDB Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;job_goal.type&quot;: &quot;summarization&quot;
+}
+</code></pre>
+<hr />
+<h3 id="example-2-compound-andor">Example 2: Compound AND/OR</h3>
+<p><strong>Input Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;logicalOperator&quot;: &quot;AND&quot;,
+  &quot;conditions&quot;: [
+    {
+      &quot;variable&quot;: &quot;job_priority_value&quot;,
+      &quot;operator&quot;: &quot;&gt;=&quot;,
+      &quot;value&quot;: 7
+    },
+    {
+      &quot;logicalOperator&quot;: &quot;OR&quot;,
+      &quot;conditions&quot;: [
+        {
+          &quot;variable&quot;: &quot;submitted_by&quot;,
+          &quot;operator&quot;: &quot;==&quot;,
+          &quot;value&quot;: &quot;org-123&quot;
+        },
+        {
+          &quot;variable&quot;: &quot;submitted_by&quot;,
+          &quot;operator&quot;: &quot;==&quot;,
+          &quot;value&quot;: &quot;org-456&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p><strong>Translated MongoDB Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;$and&quot;: [
+    { &quot;job_priority_value&quot;: { &quot;$gte&quot;: 7 } },
+    {
+      &quot;$or&quot;: [
+        { &quot;submitted_by&quot;: &quot;org-123&quot; },
+        { &quot;submitted_by&quot;: &quot;org-456&quot; }
+      ]
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="example-3-pattern-match-using-like">Example 3: Pattern Match Using <code>LIKE</code></h3>
+<p><strong>Input Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;variable&quot;: &quot;job_goal.type&quot;,
+  &quot;operator&quot;: &quot;LIKE&quot;,
+  &quot;value&quot;: &quot;*translation*&quot;
+}
+</code></pre>
+<p><strong>Translated MongoDB Query:</strong></p>
+<pre><code class="language-json">{
+  &quot;job_goal.type&quot;: {
+    &quot;$regex&quot;: &quot;.*translation.*&quot;
+  }
+}
+</code></pre>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

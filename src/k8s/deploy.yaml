@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: exchanges
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-exchange
+  namespace: exchanges
+  labels:
+    app: demo-exchange
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-exchange
+  template:
+    metadata:
+      labels:
+        app: demo-exchange
+    spec:
+      containers:
+      - name: demo-exchange
+        imagePullPolicy: Always
+        image: 100.114.179.122:31280/agents/xchange:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          value: "5000"
+        - name: EXCHANGE_ID
+          value: "demo-exchange"
+        - name: MONGO_URL
+          value: "mongodb://registry-0.registries.svc.cluster.local:27017/exchange"
+        - name: FUNCTION_REGISTRY_URL
+          value: "http://100.114.179.122:30701"
+        - name: SUBJECT_DELEGATE_URL
+          value: "http://100.114.179.122:30725"
+        - name: BIDDING_SERVICE_URL
+          value: "http://orcade-svc.orcade.svc.cluster.local:5000"
+        - name: EXECUTOR_ID
+          value: "demo-exchange"
+        - name: UNIQUE_PARAMETER
+          value: "demo-exchange"
+        - name: NUM_WORKERS
+          value: "8"
+        - name: BID_POLL_INTERVAL
+          value: "5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-exchange-svc
+  namespace: exchanges
+  labels:
+    app: demo-exchange
+spec:
+  selector:
+    app: demo-exchange
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30740
+  type: NodePort

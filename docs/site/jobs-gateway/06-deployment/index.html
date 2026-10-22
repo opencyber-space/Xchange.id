@@ -1,0 +1,1111 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05-health-checks/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>6. Deployment & walkthrough - Xchange.id</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-deployment-walkthrough" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Xchange.id" class="md-header__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Xchange.id
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. Deployment & walkthrough
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Xchange.id" class="md-nav__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Xchange.id
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📚 Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📤 Xchange.id
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📤 Xchange.id
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/job-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Job Submission Lifecycle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db-registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tasks DB Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Task Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exchange System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exchange System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/04-assignment-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Assignment modes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/05-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Functions to write
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/06-delegate-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Delegate system
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exchange-system/07-bidding-mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Bidding mode integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Jobs Gateway
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Jobs Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Discovery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-health-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Health checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    6. Deployment & walkthrough
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Deployment & walkthrough
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-build-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Build &amp; deploy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-end-to-end-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 End-to-end walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-build-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Build &amp; deploy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-end-to-end-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 End-to-end walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../">← Back to index</a></p>
+<h1 id="6-deployment-walkthrough">6. Deployment &amp; walkthrough</h1>
+<h2 id="61-configuration">6.1 Configuration</h2>
+<p>All configuration is through environment variables:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MONGO_URL</code></td>
+<td><strong>required</strong></td>
+<td>MongoDB connection string for the registry</td>
+</tr>
+<tr>
+<td><code>GATEWAY_DB_NAME</code></td>
+<td><code>xchange_gateway</code></td>
+<td>Database holding the <code>exchanges</code> collection (<a href="../02-schema/#23-storage">§2.3</a>)</td>
+</tr>
+<tr>
+<td><code>PORT</code></td>
+<td><code>5000</code></td>
+<td>HTTP listen port</td>
+</tr>
+<tr>
+<td><code>HEALTH_CHECK_INTERVAL</code></td>
+<td><code>30</code></td>
+<td>Seconds between background health sweeps. <code>0</code> disables them (<a href="../05-health-checks/#52-when-probes-run">§5.2</a>).</td>
+</tr>
+<tr>
+<td><code>PROXY_READ_TIMEOUT</code></td>
+<td><code>300</code></td>
+<td>Read timeout, in seconds, for forwarded calls (<a href="../03-apis/#33-gateway-forwarding">§3.3</a>)</td>
+</tr>
+<tr>
+<td><code>DISCOVERY_WORKERS</code></td>
+<td><code>8</code></td>
+<td>Thread-pool size for discovery's subject fan-out (<a href="../04-discovery/#43-stage-2-subject-fan-out">§4.3</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>The gateway needs <strong>none</strong> of exchange-db's external-service variables
+(<code>FUNCTION_REGISTRY_URL</code>, <code>SUBJECT_DELEGATE_URL</code>, <code>BIDDING_SERVICE_URL</code>,
+...). It only ever talks to exchange-db instances and its own MongoDB.</p>
+<h2 id="62-build-deploy">6.2 Build &amp; deploy</h2>
+<p>The image is built the same way as exchange-db's (<code>python:3.11-buster</code>,
+<code>pip install -r requirements.txt</code>, <code>python3 main.py</code>):</p>
+<pre><code class="language-bash">cd jobs-gateway
+docker build . -t 100.114.179.122:31280/agents/xchange-jobs-gateway:latest
+docker push 100.114.179.122:31280/agents/xchange-jobs-gateway:latest
+
+kubectl apply -f ../k8s/jobs-gateway.yaml
+</code></pre>
+<p><code>k8s/jobs-gateway.yaml</code> creates, in the <code>exchanges</code> namespace alongside the
+exchanges themselves:</p>
+<ul>
+<li>a <code>jobs-gateway</code> Deployment (1 replica, port <code>5000</code>), pointed at the same
+  MongoDB server as <code>demo-exchange</code>
+  (<code>registry-0.registries.svc.cluster.local:27017</code>) but its own
+  <code>xchange_gateway</code> database;</li>
+<li>a <code>jobs-gateway-svc</code> NodePort Service on <strong><code>30741</code></strong>, next to
+  <code>demo-exchange-svc</code> on <code>30740</code>.</li>
+</ul>
+<p>Run a single replica. Every replica runs its own background health sweep.
+Several replicas would still give correct results, since probes are
+idempotent writes, but each exchange would be probed once per replica per
+interval.</p>
+<p>Running locally:</p>
+<pre><code class="language-bash">cd jobs-gateway
+pip install -r requirements.txt
+MONGO_URL=mongodb://localhost:27017 PORT=5001 python3 main.py
+</code></pre>
+<h2 id="63-end-to-end-walkthrough">6.3 End-to-end walkthrough</h2>
+<p>This assumes <code>demo-exchange</code> is deployed from <code>k8s/deploy.yaml</code> and the
+gateway from <code>k8s/jobs-gateway.yaml</code>. Calls go to the gateway's NodePort
+(<code>$GW</code>, e.g. <code>http://&lt;node-ip&gt;:30741</code>). Note that <strong><code>exchange_api_url</code> must
+be reachable from the gateway pod</strong>, not from your laptop, so in-cluster
+service DNS is the right choice here.</p>
+<p><strong>1. Register the exchange.</strong></p>
+<pre><code class="language-bash">curl -X POST $GW/exchanges \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;exchange_id&quot;: &quot;demo-exchange&quot;,
+    &quot;exchange_api_url&quot;: &quot;http://demo-exchange-svc.exchanges.svc.cluster.local:5000&quot;,
+    &quot;exchange_name&quot;: &quot;Demo exchange&quot;,
+    &quot;exchange_tags&quot;: [&quot;nlp&quot;, &quot;public&quot;]
+  }'
+</code></pre>
+<p>→ <code>201</code>, <code>exchange_status: "healthy"</code>.</p>
+<p><strong>2. Add a subject to it through the gateway.</strong></p>
+<pre><code class="language-bash">curl -X POST $GW/exchanges/demo-exchange/api/subjects \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;subject_id&quot;: &quot;agent-summarizer-01&quot;,
+    &quot;subject_capabilities&quot;: {&quot;max_doc_tokens&quot;: 50000},
+    &quot;topics&quot;: [&quot;summarization&quot;, &quot;nlp&quot;]
+  }'
+</code></pre>
+<p>→ <code>201</code>, forwarded from exchange-db's <code>POST /subjects</code>.</p>
+<p><strong>3. Discover where summarization work can go.</strong></p>
+<pre><code class="language-bash">curl -X POST $GW/discover \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;status&quot;: &quot;healthy&quot;, &quot;subject_topics&quot;: [&quot;summarization&quot;]}'
+</code></pre>
+<p>→ <code>demo-exchange</code> with <code>matching_subject_ids: ["agent-summarizer-01"]</code>.</p>
+<p><strong>4. Submit a task to the chosen exchange and subject.</strong></p>
+<pre><code class="language-bash">curl -X POST $GW/exchanges/demo-exchange/api/tasks \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;task_assignment_type&quot;: &quot;direct&quot;,
+    &quot;task_data&quot;: {&quot;instruction&quot;: &quot;summarize this document&quot;, &quot;doc_url&quot;: &quot;https://storage.example.com/report.pdf&quot;},
+    &quot;task_metadata&quot;: {&quot;task_assignment&quot;: {&quot;subject_id&quot;: &quot;agent-summarizer-01&quot;}}
+  }'
+</code></pre>
+<p>→ <code>201</code> with the new <code>task_id</code>.</p>
+<p><strong>5. Poll for the result.</strong></p>
+<pre><code class="language-bash">curl $GW/exchanges/demo-exchange/api/tasks/&lt;task_id&gt;/output
+</code></pre>
+<p>→ <code>task_assignment_status</code> moves from <code>pending</code> to <code>completed</code> (or
+<code>failed</code>), exactly as described in
+<a href="../../exchange-system/03-apis/#34-how-to-read-task-output">Exchange System §3.4</a>.</p>
+<p><strong>Adding another exchange</strong> is just another deployment (copy
+<code>k8s/deploy.yaml</code> with a new name, <code>EXCHANGE_ID</code> and <code>nodePort</code>) plus another
+<code>POST /exchanges</code>. Steps 3–5 then automatically consider it.</p>
+<hr />
+<p><a href="../05-health-checks/">← Previous: Health checks</a> · <a href="../">Back to index</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

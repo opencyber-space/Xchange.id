@@ -1,0 +1,1168 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../06-delegate-system/">
+      
+      
+        <link rel="next" href="../../jobs-gateway/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>7. Bidding mode integration - Xchange.id</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7-bidding-mode-integration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Xchange.id" class="md-header__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Xchange.id
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7. Bidding mode integration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Xchange.id" class="md-nav__button md-logo" aria-label="Xchange.id" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Xchange.id
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📚 Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📤 Xchange.id
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📤 Xchange.id
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/job-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Job Submission Lifecycle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db-registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tasks DB Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tasks-db-system/tasks-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Task Database
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exchange System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exchange System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-assignment-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Assignment modes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Functions to write
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-delegate-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Delegate system
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    7. Bidding mode integration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Bidding mode integration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71-biddingclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 BiddingClient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-creating-the-bid-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Creating the bid job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72a-open-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2a Open mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72b-mixed-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2b Mixed mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-polling-for-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Polling for the result
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Jobs Gateway
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Jobs Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/01-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/02-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/03-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/04-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Discovery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/05-health-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Health checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs-gateway/06-deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Deployment & walkthrough
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71-biddingclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 BiddingClient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-creating-the-bid-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Creating the bid job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72a-open-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2a Open mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72b-mixed-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2b Mixed mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-polling-for-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Polling for the result
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../">← Back to index</a></p>
+<h1 id="7-bidding-mode-integration">7. Bidding mode integration</h1>
+<p><code>bidding</code> mode makes Xchange act as a <strong>creator</strong> against Orcade's own
+<code>/bid-jobs</code> REST API (see Orcade's
+<a href="https://openarcade-internal.pages.dev/bids-system/03-apis/">APIs doc</a>), via a small
+client — <code>BiddingClient</code> (<code>exchange-db/core/bidding_client.py</code>) — rather
+than reimplementing any bidding/evaluation logic locally. Everything about
+<em>how</em> a bid job actually resolves (subject eligibility, PQT rejection,
+evaluator semantics, the <code>bid_request</code>/<code>bid_winner</code> delegate notifications)
+is Orcade's behavior, documented in full in
+<a href="https://openarcade-internal.pages.dev/bids-system/">Orcade's own docs</a> — this
+page only covers the Xchange-side glue.</p>
+<h2 id="71-biddingclient">7.1 <code>BiddingClient</code></h2>
+<pre><code class="language-python">class BiddingClient:
+    def __init__(self, *, base_url=None, timeout=(10, 30)):
+        self.base_url = (base_url or os.environ[&quot;BIDDING_SERVICE_URL&quot;]).rstrip(&quot;/&quot;)
+        ...
+
+    def create_bid_job(self, **kwargs) -&gt; dict: ...      # POST /bid-jobs
+    def get_bid_job(self, bid_job_id) -&gt; dict: ...        # GET /bid-jobs/{id}
+    def get_bids(self, bid_job_id) -&gt; list: ...           # GET /bid-jobs/{id}/bids
+    def get_task_results(self, bid_job_id) -&gt; list: ...   # GET /bid-jobs/{id}/task-results
+</code></pre>
+<p>Base URL comes from <code>BIDDING_SERVICE_URL</code> (in the k8s manifest, Orcade's
+in-cluster service DNS). Each method unwraps Orcade's <code>{"ok": ..., "data"/"error": ...}</code>
+envelope itself and raises <code>RuntimeError(error)</code> on <code>"ok": false</code>, or lets
+<code>requests</code>' own <code>HTTPError</code> propagate on a transport-level failure (non-2xx,
+timeout, connection error) — either way, the caller in
+<code>TaskAssignmentService</code> catches <code>Exception</code> broadly, so both failure shapes
+are handled identically.</p>
+<h2 id="72-creating-the-bid-job">7.2 Creating the bid job</h2>
+<p>From <code>_run_bidding()</code>, on the background thread started for the task:</p>
+<pre><code class="language-python">bid_job = self._bidding_client.create_bid_job(
+    bid_job_metadata=assignment.get(&quot;bid_job_metadata&quot;, {}),
+    bid_job_description=assignment.get(&quot;bid_job_description&quot;, {}),
+    bid_job_name=assignment.get(&quot;bid_job_name&quot;, {}),
+    bid_job_evaluator_id=assignment[&quot;bid_job_evaluator_id&quot;],
+    bid_job_pqt_id=assignment.get(&quot;bid_job_pqt_id&quot;, &quot;&quot;),
+    bid_job_tie_id=assignment.get(&quot;bid_job_tie_id&quot;, &quot;&quot;),
+    bid_job_creator_id=assignment.get(&quot;bid_job_creator_id&quot;, &quot;&quot;),
+    bid_job_subject_ids=subject_ids,
+)
+</code></pre>
+<p><code>subject_ids</code> is resolved as follows:</p>
+<ol>
+<li>Start from <code>assignment["bid_job_subject_ids"]</code> — an explicit list — if
+   given (the "manually specified" case); otherwise an empty list.</li>
+<li>If <code>assignment["topics"]</code> is also given, resolve it to
+   <code>[s.subject_id for s in ExchangeSubjectsCRUD.list({"topics": {"$in": topics}})]</code>
+   — every subject whose own <code>topics</code> field
+   (<a href="../02-schema/#22-exchangesubjects">§2.2</a>) contains <strong>any</strong> of the
+   requested topics — and take the <strong>union</strong> (deduplicated,
+   order-preserving) with the explicit list from step 1. Neither field takes
+   priority over the other; specifying both adds their results together.</li>
+<li>If both <code>bid_job_subject_ids</code> and <code>topics</code> were omitted entirely, fall
+   back to every subject currently registered in this exchange
+   (<code>ExchangeSubjectsCRUD.list()</code> with no filter).</li>
+</ol>
+<p>Note this list is captured once, at bid-job creation time — however it was
+resolved — a subject added (or re-tagged) afterwards is not retroactively
+added to an already-created bid job (Orcade's <code>bid_job_subject_ids</code> is
+fixed at creation, see Orcade's
+<a href="https://openarcade-internal.pages.dev/bids-system/01-concepts/#11-actors">concepts doc</a>).</p>
+<p>On success, the returned <code>bid_job["bid_job_id"]</code> is written back onto the
+Xchange task immediately, so it can be cross-referenced or queried directly
+against Orcade later:</p>
+<pre><code class="language-python">self._tasks_crud.update(task.task_id, {
+    &quot;task_metadata.bid_job_id&quot;: bid_job[&quot;bid_job_id&quot;],
+    &quot;task_assignment_status&quot;: &quot;bidding&quot;,
+})
+</code></pre>
+<p>If <code>create_bid_job</code> itself raises (network failure, or Orcade rejects it —
+e.g. <code>bid_job_evaluator_id</code> required but this docstring already made it
+required on the Xchange side too), the task is marked <code>failed</code> and no
+polling ever starts.</p>
+<h2 id="72a-open-mode">7.2a Open mode</h2>
+<p>With <code>bid_job_mode: "open"</code>, <code>_run_bidding</code> skips subject resolution entirely
+and sends <code>bid_job_subject_ids=[]</code> together with <code>bid_job_mode</code>,
+<code>bid_job_max_subjects</code>, <code>bid_job_max_time</code>, and <code>bid_job_tags</code>. Orcade does
+not notify anyone on creation; subjects discover the job by tag
+(<code>GET /bid-jobs/by-tags</code> on Orcade) and apply by posting a bid.</p>
+<p>The poller checks for two terminal conditions each cycle:</p>
+<ul>
+<li>a <code>bid_winner</code> task-result exists → <code>completed</code>, as in closed mode;</li>
+<li>the job has <code>bid_job_status == "closed"</code> <strong>and</strong> <code>GET /bid-jobs/{id}/bids</code>
+  is empty → <code>rejected</code> with <code>"no subject applied to the bid job"</code>. Bids are
+  persisted before a subject claims its slot, so an empty bid list on a
+  closed job means no one ever applied.</li>
+</ul>
+<p>A closed job that has applicants but no <code>bid_winner</code> (for example, the
+evaluator failed) still polls indefinitely, as in closed mode.</p>
+<h2 id="72b-mixed-mode">7.2b Mixed mode</h2>
+<p><code>bid_job_mode: "mixed"</code> needs no special casing in <code>_run_bidding</code> — the
+subject-pool-resolution branch only skips for <code>bid_job_mode == "open"</code>, and
+every other mode (including <code>"mixed"</code>) goes through the exact same
+<code>bid_job_subject_ids</code> / <code>topics</code> union logic as <code>closed</code> (§7.2). The only
+difference happens entirely on Orcade's side: Orcade requires a non-empty
+roster for mixed mode (empty → create-job failure → Xchange task marked
+<code>failed</code>, same as any other Orcade-side rejection), sends <code>bid_request</code> to
+every named subject just like closed mode, <em>and</em> additionally tags the job
+with <code>subject::&lt;subject_id&gt;</code> for each one, so a subject can also find it via
+<code>GET /bid-jobs/by-tags</code> instead of relying on the push notification. Xchange
+itself never queries by tag — that lookup is something a subject does
+against Orcade directly, outside Xchange's own flow. <code>bid_job_max_subjects</code>
+/ <code>bid_job_max_time</code> do not apply to mixed mode; if set, Orcade rejects the
+job the same way it would for <code>closed</code>. Polling behaves exactly like closed
+mode too — no early "no applicants" exit, since mixed mode has no open/closed
+application window.</p>
+<h2 id="73-polling-for-the-result">7.3 Polling for the result</h2>
+<pre><code class="language-python">while True:
+    task_results = self._bidding_client.get_task_results(bid_job_id)
+    winner = next((r for r in task_results if r.get(&quot;task_type&quot;) == &quot;bid_winner&quot;), None)
+    if winner is not None:
+        self._tasks_crud.update(task.task_id, {&quot;task_output&quot;: winner[&quot;task_result&quot;], &quot;task_assignment_status&quot;: &quot;completed&quot;})
+        return
+    time.sleep(self._bid_poll_interval)
+</code></pre>
+<p><code>get_task_results</code> maps to Orcade's <code>GET /bid-jobs/{id}/task-results</code>, which
+returns <strong>every</strong> delegate round-trip for the job — both <code>bid_request</code> (one
+per subject, sent immediately on job creation) and <code>bid_winner</code> (one, sent
+once Orcade's evaluator has resolved a winner). Xchange only cares about the
+<code>bid_winner</code> entry; <code>winner["task_result"]</code> is Orcade's
+<code>BidTaskResult.task_result</code> — i.e. <strong>the winning subject's raw response to
+the <code>bid_winner</code> delegate notification</strong>, not the evaluator's own
+<code>result_data</code> output. If you need the evaluator's <code>result_data</code> (agreed
+price, rationale, etc.) in <code>task_output</code> too, either have the evaluator
+function embed it into what gets sent to the subject (so it round-trips
+back through the subject's response), or extend <code>_run_bidding</code> to also fetch
+it — Orcade doesn't expose the evaluator's raw output via any endpoint, only
+via what it forwards to the winning subject (see Orcade's
+<a href="https://openarcade-internal.pages.dev/bids-system/05-delegate-system/#53-bid_winner-sent-after-evaluation">delegate-system doc, §5.3</a>).</p>
+<p><strong>Failure/liveness notes:</strong></p>
+<ul>
+<li>A transient error from <code>get_task_results</code> (Orcade briefly unreachable)
+  does <strong>not</strong> fail the task — it's logged and the loop just retries after
+  <code>bid_poll_interval</code> seconds (default 5s, set via
+  <code>TaskAssignmentService(bid_poll_interval=...)</code>).</li>
+<li>There is <strong>no timeout</strong> on the loop itself. If the bid job never produces
+  a <code>bid_winner</code> (per Orcade's own rules: evaluation only fires once <em>every</em>
+  subject in <code>bid_job_subject_ids</code> has bid — see Orcade's
+  <a href="https://openarcade-internal.pages.dev/bids-system/01-concepts/#12-lifecycle-of-a-bid-job">concepts doc</a>),
+  this Xchange task sits in <code>task_assignment_status="bidding"</code> forever. To
+  debug a stuck job, use the <code>bid_job_id</code> written to
+  <code>task_metadata.bid_job_id</code> and query Orcade directly:
+  <code>GET {BIDDING_SERVICE_URL}/bid-jobs/{bid_job_id}/bids</code> to see who has/hasn't
+  bid yet.</li>
+</ul>
+<hr />
+<p><a href="../06-delegate-system/">← Previous: Delegate system</a> · <a href="../">Back to index</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
