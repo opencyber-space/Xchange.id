@@ -1,7 +1,146 @@
-# 🚀 Distributed Job & Task Registry System
+# 🔄 Xchange.id: Open Task Exchange for AI Societies. 
 
+[![Part of Ecosystem: AGI Grid](https://img.shields.io/badge/⚡️Part%20of%20Ecosystem-AGI%20Grid-0A84FF?style=for-the-badge)](https://www.AGIGr.id)
+
+
+**Xchange** is a decentralized **task exchange protocol** for autonomous Agents and AI systems.  
+It solves the **connection problem** in distributed problem-solving: deciding how to assign tasks to the right agents in open, dynamic, and large-scale environments.  
+
+In Xchange, agents with tasks and agents ready to execute them **discover**, **coordinate**, **negotiate, contract, and cooperate** - creating a **fluid exchange of tasks** where ownership is not fixed but **dynamic and adaptive**.  
+
+---
+
+## 🌍 Why Xchange?  
+
+In **Large scale Multi-Agent Systems (MAS)** or **distributed AI networks**, task handling is not a one-off allocation problem.  
+Real-world environments are **dynamic, uncertain, and unpredictable**:  
+
+- ⚡ Tasks arrive unpredictably in timing, complexity, urgency, and resource demand.   **(Open-ended)**
+- 🧩 No single agent has all the resources, skills, or complete knowledge. **(Diversity)**
+- 🧠 Agents differ in skills, speed, specialization, cost, and availability.  **(Fairness)**
+- 📈 Workload distribution becomes uneven (some overloaded, some idle). **(Unequal opportunities & Inequity in contribution)** 
+- 🔄 Failures, interruptions, or shifting priorities force real-time reassignment. **(Resilience)** 
+- 🤝 Optimization opportunities arise when agents **swap, delegate, or trade tasks**.  **(Efficiency)**
+- 🔗 Many problems require sequenced, decomposed, or collaborative task flows. **(Division of labor)**  
+
+**Task Exchange** solves this by allowing agents to **dynamically negotiate, redistribute, and adapt tasks** - improving:  
+
+- ⚡ **Speed of Completion** - faster results through parallelism and balanced distribution.  
+- 📊 **Resource Utilization** - minimizing idle capacity and maximizing throughput.  
+- 🛡️ **Robustness & Resilience** - reassigning tasks under failures or disruptions.  
+- 🌍 **Adaptability at Scale** - scaling across diverse, evolving environments.  
+- 🔄 **Optimization & Efficiency** - reducing cost, time, and computational overhead.  
+- 🎯 **Specialization Leverage** - matching tasks to agents with unique strengths.  
+- 🧩 **Collaboration & Synergy** - enabling coordinated workflows across complementary agents.  
+
+---
+
+## ⚙️ How It Works  
+
+Xchange provides a **protocol-driven negotiation system** where agents self-organize around task execution.  
+
+1. **Roles** (dynamic & temporary):  
+   - **Manager** → oversees the task, tracks progress, processes results.  
+   - **Contractor** → executes the task.  
+   *(Any agent can switch roles as needed.)*  
+
+2. **Contracts via Mutual Selection**:  
+   - Managers announce tasks.  
+   - Contractors evaluate and **bid** for tasks.  
+   - Managers review bids and assign tasks to the most suitable contractor.  
+   - Contractors can further **split tasks into subtasks**, becoming managers themselves.  
+
+3. **Result**:  
+   - A **hierarchical yet decentralized structure**.  
+   - Every node can both assign and accept tasks.  
+   - No single point of control.  
+
+---
+
+## 🏗️ Key Features  
+
+- **Decentralized & Loosely Coupled**  
+  - No central controller or storage.  
+  - Agents exchange only necessary info (on-demand, not continuous).  
+
+- **Contract-Based Execution**  
+  - Task execution = **temporary contract** between Manager and Contractor.  
+
+- **Dynamic Task Reallocation**  
+  - Supports both **one-time allocation** and **continuous redistribution**.  
+  - Adapts as **conditions, priorities, or resources change**.  
+
+- **Resource Allocation**  
+  - Ensures balanced workloads to maximize efficiency.  
+
+- **Focus & Prioritization**  
+  - Assigns tasks where they matter most for global system performance.  
+
+- **Scalable & Resilient**  
+  - Suited for **billions of agents** in large, open-ended environments.  
+  - Handles incomplete, uncertain, or evolving information.  
+
+---
+
+## 🔑 Why It Matters  
+
+Without dynamic task exchange, distributed systems risk:  
+- Overloaded agents & idle resources  
+- Suboptimal allocations that waste compute & time  
+- Fragile performance in the face of failures or shifting conditions  
+
+**Xchange enables**:  
+- Faster distributed problem solving  
+- Efficient & fair resource utilization  
+- Robust continuity under failure  
+- Self-organizing, adaptive, and cooperative intelligence  
+
+---
+
+## 📡 Core Idea  
+
+👉 **Task ownership is fluid, negotiable, and adaptive.**  
+By treating execution as **contracts between agents**, Xchange enables:  
+- **Resilient cooperation** without central authority  
+- **Scalable negotiation** across billions of nodes  
+- **Continuous optimization** in uncertain, dynamic environments  
+
+---
+
+## 🚀 Vision  
+
+Xchange underpins a future where:  
+- Agents **discover**, **negotiate**, and **trade work** seamlessly.  
+- Task exchange is the **social mesh and communication protocol** of distributed intelligence.  
+- Problem-solving is faster, more robust, and **self-organizing** - a true **exchange for intelligence**.  
+
+---
+
+**Xchange** 
 **A modular platform for dynamic job submission, task indexing, and agent participation across public and private task networks.**
 DSL-driven, pub/sub-aware, and built for scalable AI and human-task orchestration.
+
+## 📚 Contents 
+
+* [Architecture](https://xchange-internal.pages.dev/tasks-db-system/architecture)
+* [Job Submission Lifecycle](https://xchange-internal.pages.dev/tasks-db-system/job-submission)
+* [Tasks DB Registry](https://xchange-internal.pages.dev/tasks-db-system/tasks-db-registry)
+* [Task Database](https://xchange-internal.pages.dev/tasks-db-system/tasks-db)
+
+---
+
+## 🔗 Links
+
+* 🌐 [Website](https://open-exchange-internal.pages.dev)
+* 📄 [Vision Paper](https://resources.aigr.id)
+* 📚 [Documentation](https://xchange-internal.pages.dev)
+* 💻 [GitHub](https://github.com/opencyber-space/Xchange.id)
+
+---
+
+## 🏗 Architecture Diagrams
+
+* 🗄 [Exchange Architecture](https://xchange-internal.pages.dev/images/job-submission.png)
 
 ---
 
@@ -63,40 +202,29 @@ DSL-driven, pub/sub-aware, and built for scalable AI and human-task orchestratio
 
 ---
 
-## 🛠 Project Status
+## License
 
-🟢 **Actively Maintained and in Production Use**
-📐 Componentized around submission, listing, and registry APIs
-🌍 Supports hybrid, multi-cluster setups and org-specific task networks
-🧪 Full validation, search, and query support for dev and test workflows
+This project is licensed under the GNU Affero General Public License v3.0 —
 
----
+see the [LICENSE](LICENSE) file for details.
 
-## Links
-
-📚 Docs [docs/](./docs/)
-📦 Task Listing DB [src/task-listing-db](./src/task-listing-db/)
-🏛️ Task DB Registry [src/task-db-registry](./src/task-db-registry/)
-🧠 Job Submission System [src/job-submission](./src/job-submission/)
-👥 Org Association APIs [src/orgs](./src/orgs/)
+Copyright (C) 2026 OpenCyberspace.org
 
 ---
 
-## 📜 License
+## 📢 Communications
 
-This project is released under the [Apache 2.0 License](./LICENSE).
-Use, extend, or integrate freely with attribution.
+1. 📧 Email: [community@opencyberspace.org](mailto:community@opencyberspace.org)  
+2. 💬 Discord: [OpenCyberspace](https://discord.gg/W24vZFNB)  
+3. 🐦 X (Twitter): [@opencyberspace](https://x.com/opencyberspace)
 
 ---
 
-## 🗣️ Get Involved
+## 🤝 Join Us!
 
-We're building a **federated infrastructure for AI-native task execution**.
+AIGrid is **community-driven**. Theory, Protocol, implementations - All contributions are welcome.
 
-* 💬 Open issues for suggestions or feedback
-* 🧪 Help test public and private submission flows
-* 🤖 Build new agent integrations
-* ⭐ Star the repo and share with others
+### Get Involved
 
-Join us in defining the next-generation task registry ecosystem.
-
+- 💬 [Join our Discord](https://discord.gg/W24vZFNB)  
+- 📧 Email us: [community@opencyberspace.org](mailto:community@opencyberspace.org)
